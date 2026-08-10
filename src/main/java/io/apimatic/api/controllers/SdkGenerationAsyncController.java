@@ -50,6 +50,8 @@ public final class SdkGenerationAsyncController extends BaseController {
      * @param  language  Required parameter: Languages for which SDKs can be generated.
      * @param  xApiMaticCallbackUrl  Optional parameter: Optional header containing callback url.
      *         This url will be called by the server once the SDK generation completes
+     * @param  packageVersion  Optional parameter: Optional field containing the package version to
+     *         apply to the generated SDK.
      * @return    Returns the SdkGenerationAsyncResponse wrapped in ApiResponse response from the API call
      * @throws    ApiException    Represents error response from the server.
      * @throws    IOException    Signals that an I/O exception of some sort has occurred.
@@ -58,9 +60,10 @@ public final class SdkGenerationAsyncController extends BaseController {
             final ContentType contentType,
             final FileWrapper file,
             final SdkLanguages language,
-            final String xApiMaticCallbackUrl) throws ApiException, IOException {
+            final String xApiMaticCallbackUrl,
+            final String packageVersion) throws ApiException, IOException {
         return prepareGenerateSdkViaBuildInputAsyncRequest(contentType, file, language,
-                xApiMaticCallbackUrl).execute();
+                xApiMaticCallbackUrl, packageVersion).execute();
     }
 
     /**
@@ -71,16 +74,19 @@ public final class SdkGenerationAsyncController extends BaseController {
      * @param  language  Required parameter: Languages for which SDKs can be generated.
      * @param  xApiMaticCallbackUrl  Optional parameter: Optional header containing callback url.
      *         This url will be called by the server once the SDK generation completes
+     * @param  packageVersion  Optional parameter: Optional field containing the package version to
+     *         apply to the generated SDK.
      * @return    Returns the SdkGenerationAsyncResponse wrapped in ApiResponse response from the API call
      */
     public CompletableFuture<ApiResponse<SdkGenerationAsyncResponse>> generateSdkViaBuildInputAsyncAsync(
             final ContentType contentType,
             final FileWrapper file,
             final SdkLanguages language,
-            final String xApiMaticCallbackUrl) {
+            final String xApiMaticCallbackUrl,
+            final String packageVersion) {
         try {
             return prepareGenerateSdkViaBuildInputAsyncRequest(contentType, file, language,
-            xApiMaticCallbackUrl).executeAsync();
+            xApiMaticCallbackUrl, packageVersion).executeAsync();
         } catch (Exception e) {
             throw new CompletionException(e);
         }
@@ -93,7 +99,8 @@ public final class SdkGenerationAsyncController extends BaseController {
             final ContentType contentType,
             final FileWrapper file,
             final SdkLanguages language,
-            final String xApiMaticCallbackUrl) {
+            final String xApiMaticCallbackUrl,
+            final String packageVersion) {
         return new ApiCall.Builder<ApiResponse<SdkGenerationAsyncResponse>, ApiException>()
                 .globalConfig(getGlobalConfiguration())
                 .requestBuilder(requestBuilder -> requestBuilder
@@ -105,6 +112,8 @@ public final class SdkGenerationAsyncController extends BaseController {
                                 .multipartHeaders("content-type", "application/octect-stream"))
                         .formParam(param -> param.key("language")
                                 .value((language != null) ? language.value() : "csharp"))
+                        .formParam(param -> param.key("packageVersion")
+                                .value(packageVersion).isRequired(false))
                         .headerParam(param -> param.key("Content-Type")
                                 .value((contentType != null) ? contentType.value() : null).isRequired(false))
                         .headerParam(param -> param.key("X-APIMatic-CallbackUrl")

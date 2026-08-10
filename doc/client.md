@@ -52,13 +52,10 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 
 | Name | Description | Return Type |
 |  --- | --- | --- |
-| `getApisManagementController()` | Provides access to ApisManagement controller. | `ApisManagementController` |
-| `getCodeGenerationImportedApisController()` | Provides access to CodeGenerationImportedApis controller. | `CodeGenerationImportedApisController` |
 | `getCodeGenerationExternalApisController()` | Provides access to CodeGenerationExternalApis controller. | `CodeGenerationExternalApisController` |
 | `getTransformationController()` | Provides access to Transformation controller. | `TransformationController` |
 | `getDocsPortalManagementController()` | Provides access to DocsPortalManagement controller. | `DocsPortalManagementController` |
 | `getDocsPortalGenerationAsyncController()` | Provides access to DocsPortalGenerationAsync controller. | `DocsPortalGenerationAsyncController` |
-| `getApiValidationImportedApisController()` | Provides access to ApiValidationImportedApis controller. | `ApiValidationImportedApisController` |
 | `getApiValidationExternalApisController()` | Provides access to ApiValidationExternalApis controller. | `ApiValidationExternalApisController` |
 | `getApiValidationV2ExternalApisController()` | Provides access to ApiValidationV2ExternalApis controller. | `ApiValidationV2ExternalApisController` |
 | `getSdkGenerationAsyncController()` | Provides access to SdkGenerationAsync controller. | `SdkGenerationAsyncController` |

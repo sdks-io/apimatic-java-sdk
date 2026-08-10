@@ -24,7 +24,8 @@ CompletableFuture<ApiResponse<SdkGenerationAsyncResponse>> generateSdkViaBuildIn
     final ContentType contentType,
     final FileWrapper file,
     final SdkLanguages language,
-    final String xApiMaticCallbackUrl)
+    final String xApiMaticCallbackUrl,
+    final String packageVersion)
 ```
 
 ## Authentication
@@ -39,6 +40,7 @@ This endpoint requires [Authorization](../../doc/auth/custom-header-signature.md
 | `file` | `FileWrapper` | Form, Required | The input file to the SDK Generator. Must contain the build file or a spec folder containing the API Specification. |
 | `language` | [`SdkLanguages`](../../doc/models/sdk-languages.md) | Form, Required | Languages for which SDKs can be generated. |
 | `xApiMaticCallbackUrl` | `String` | Header, Optional | Optional header containing callback url. This url will be called by the server once the SDK generation completes |
+| `packageVersion` | `String` | Form, Optional | Optional field containing the package version to apply to the generated SDK. |
 
 ## Response Type
 
@@ -52,8 +54,9 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ContentType contentType = ContentType.ENUM_MULTIPARTFORMDATA;
 FileWrapper file = new FileWrapper(new File("dummy_file"), "optional-content-type");
 SdkLanguages language = SdkLanguages.CSHARP;
+String packageVersion = "1.0.0";
 
-sdkGenerationAsyncController.generateSdkViaBuildInputAsyncAsync(contentType, file, language, null).thenAccept(result -> {
+sdkGenerationAsyncController.generateSdkViaBuildInputAsyncAsync(contentType, file, language, null, packageVersion).thenAccept(result -> {
     // TODO success callback handler
     System.out.println(result);
 }).exceptionally(exception -> {

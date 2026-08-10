@@ -9,11 +9,8 @@ package io.apimatic.api;
 import io.apimatic.api.authentication.CustomHeaderAuthenticationManager;
 import io.apimatic.api.authentication.CustomHeaderAuthenticationModel;
 import io.apimatic.api.controllers.ApiValidationExternalApisController;
-import io.apimatic.api.controllers.ApiValidationImportedApisController;
 import io.apimatic.api.controllers.ApiValidationV2ExternalApisController;
-import io.apimatic.api.controllers.ApisManagementController;
 import io.apimatic.api.controllers.CodeGenerationExternalApisController;
-import io.apimatic.api.controllers.CodeGenerationImportedApisController;
 import io.apimatic.api.controllers.DocsPortalGenerationAsyncController;
 import io.apimatic.api.controllers.DocsPortalManagementController;
 import io.apimatic.api.controllers.SdkGenerationAsyncController;
@@ -44,13 +41,10 @@ public final class ApimaticApiClient implements Configuration {
     /**
      * Private store for controllers.
      */
-    private ApisManagementController apisManagement;
-    private CodeGenerationImportedApisController codeGenerationImportedApis;
     private CodeGenerationExternalApisController codeGenerationExternalApis;
     private TransformationController transformation;
     private DocsPortalManagementController docsPortalManagement;
     private DocsPortalGenerationAsyncController docsPortalGenerationAsync;
-    private ApiValidationImportedApisController apiValidationImportedApis;
     private ApiValidationExternalApisController apiValidationExternalApis;
     private ApiValidationV2ExternalApisController apiValidationV2ExternalApis;
     private SdkGenerationAsyncController sdkGenerationAsync;
@@ -134,13 +128,10 @@ public final class ApimaticApiClient implements Configuration {
                 .loggingConfiguration(((ApiLoggingConfiguration) loggingConfig).getConfiguration())
                 .globalHeader("user-agent", userAgent)
                 .build();
-        apisManagement = new ApisManagementController(globalConfig);
-        codeGenerationImportedApis = new CodeGenerationImportedApisController(globalConfig);
         codeGenerationExternalApis = new CodeGenerationExternalApisController(globalConfig);
         transformation = new TransformationController(globalConfig);
         docsPortalManagement = new DocsPortalManagementController(globalConfig);
         docsPortalGenerationAsync = new DocsPortalGenerationAsyncController(globalConfig);
-        apiValidationImportedApis = new ApiValidationImportedApisController(globalConfig);
         apiValidationExternalApis = new ApiValidationExternalApisController(globalConfig);
         apiValidationV2ExternalApis = new ApiValidationV2ExternalApisController(globalConfig);
         sdkGenerationAsync = new SdkGenerationAsyncController(globalConfig);
@@ -151,22 +142,6 @@ public final class ApimaticApiClient implements Configuration {
      */
     public static void shutdown() {
         OkClient.shutdown();
-    }
-
-    /**
-     * Get the instance of ApisManagementController.
-     * @return apisManagement
-     */
-    public ApisManagementController getApisManagementController() {
-        return apisManagement;
-    }
-
-    /**
-     * Get the instance of CodeGenerationImportedApisController.
-     * @return codeGenerationImportedApis
-     */
-    public CodeGenerationImportedApisController getCodeGenerationImportedApisController() {
-        return codeGenerationImportedApis;
     }
 
     /**
@@ -199,14 +174,6 @@ public final class ApimaticApiClient implements Configuration {
      */
     public DocsPortalGenerationAsyncController getDocsPortalGenerationAsyncController() {
         return docsPortalGenerationAsync;
-    }
-
-    /**
-     * Get the instance of ApiValidationImportedApisController.
-     * @return apiValidationImportedApis
-     */
-    public ApiValidationImportedApisController getApiValidationImportedApisController() {
-        return apiValidationImportedApis;
     }
 
     /**
